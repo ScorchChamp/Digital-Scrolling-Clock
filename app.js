@@ -7,54 +7,35 @@ const secondsBottom = document.getElementById("seconds").lastElementChild;
 
 function updateClock() {
   const date = new Date();
-  const hours = date.getHours().toString();
-  const minutes = date.getMinutes().toString();
-  const seconds = date.getSeconds().toString();
+  const hours = date.getHours().toString().padStart(2, "0");
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+  const seconds = date.getSeconds().toString().padStart(2, "0");
 
-  // if (hoursTop.textContent !== hours) {
-  //   hoursBottom.innerHTML = hoursTop.innerHTML;
-  //   hoursTop.innerHTML = hours;
-  //   hoursTop.classList.add("flip");
-  //   hoursBottom.classList.add("flip");
-  //   setTimeout(function () {
-  //     hoursTop.classList.remove("flip");
-  //     hoursBottom.classList.remove("flip");
-  //   }, 500);
-  // }
-
-  // if (minutesTop.textContent !== minutes) {
-  //   minutesBottom.innerHTML = minutesTop.innerHTML;
-  //   minutesTop.innerHTML = minutes;
-  //   minutesTop.classList.add("flip");
-  //   minutesBottom.classList.add("flip");
-  //   setTimeout(function () {
-  //     minutesTop.classList.remove("flip");
-  //     minutesBottom.classList.remove("flip");
-  //   }, 500);
-  // }
-
-  if (secondsTop.textContent !== seconds) {
-    secondsBottom.innerHTML = secondsTop.innerHTML;
-    secondsTop.innerHTML = seconds;
-
-    secondsTop.classList.add("show");
-    secondsBottom.classList.add("show");
-    secondsTop.classList.remove("flip");
-    secondsBottom.classList.remove("flip");
-    
-    setTimeout(function () {
-      secondsBottom.classList.remove("show");
-      secondsBottom.classList.add("flip");  
-      setTimeout(function () {  
-      secondsBottom.innerHTML = secondsTop.innerHTML; 
-        secondsTop.classList.add("flip");
-        secondsTop.classList.remove("show");
-        secondsBottom.classList.add("show");
-      }, 250);
-    }, 250);
-  }
-
+  (hoursTop.textContent !== hours) ? flipDigits(hoursTop, hoursBottom, hours) : '';
+  (minutesTop.textContent !== minutes) ? flipDigits(minutesTop, minutesBottom, minutes) : '';
+  (secondsTop.textContent !== seconds) ? flipDigits(secondsTop, secondsBottom, seconds) : '';
   setTimeout(updateClock, 1000);
 }
+
+function flipDigits(top, bottom, newValue) {
+  bottom.innerHTML = top.innerHTML;
+  top.innerHTML = newValue;
+  top.classList.add("show");
+  bottom.classList.add("show");
+  top.classList.remove("flip");
+  bottom.classList.remove("flip");
+
+  setTimeout(function () {
+    bottom.classList.remove("show");
+    bottom.classList.add("flip");
+    setTimeout(function () {
+      bottom.innerHTML = top.innerHTML;
+      top.classList.add("flip");
+      top.classList.remove("show");
+      bottom.classList.add("show");
+    }, 300);
+  }, 300);
+}
+
 
 updateClock();
