@@ -10,7 +10,6 @@ body {
     background-color: #fff;
     border-radius: 15px;
     height: min-content;
-    justify-content: center;
 }
 
 #clock {
@@ -21,6 +20,7 @@ body {
     padding-right: 10px;
     background-color: #fff;
     overflow: hidden;
+    justify-content: center;
 }
 
 .digit {
